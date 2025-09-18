@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Negative Words - Video Course + Quiz</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #1e40af;
+      --accent-color: #60a5fa;
+      --success-color: #22c55e;
+      --error-color: #ef4444;
+      --background-color: #f0f9ff;
+      --card-color: #ffffff;
+      --shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+      --transition: all 0.4s ease;
+    }
+    body {
+      margin:0; padding:20px; font-family:'Segoe UI',sans-serif;
+      background:linear-gradient(135deg,#f0f9ff 0%,#e0f2fe 100%);
+      display:flex; justify-content:center; align-items:flex-start; min-height:100vh;
+    }
+    .container { max-width:900px; width:100%; }
+    header {
+      text-align:center; margin-bottom:30px; padding:30px; background:var(--card-color);
+      border-radius:18px; box-shadow:var(--shadow); border-left:8px solid var(--secondary-color);
+    }
+    h1 {color:var(--secondary-color); font-size:clamp(1.5rem, 5vw, 2.2rem); margin-bottom:15px;}
+    .subtitle {font-size:clamp(1rem, 3.5vw, 1.1rem); color:var(--primary-color);}
+    .video-container {
+      background:var(--card-color); border-radius:18px; box-shadow:var(--shadow); padding:20px; margin-bottom:30px;
+    }
+    iframe, video {
+      width:100%; height:clamp(200px, 50vw, 450px); border-radius:12px;
+    }
+    .quiz-container {
+      background:var(--card-color); border-radius:18px; box-shadow:var(--shadow); padding:30px; margin-bottom:30px;
+    }
+    .question-header {display:flex; justify-content:space-between; margin-bottom:20px; flex-wrap:wrap;}
+    .question-number,.score-container {
+      padding:10px 20px; border-radius:30px; font-weight:700;
+      background:rgba(96,165,250,0.15); color:var(--secondary-color);
+    }
+    .progress-bar {height:14px; background:#e0f2fe; border-radius:10px; overflow:hidden; margin:10px 0;}
+    .progress {height:100%; background:linear-gradient(90deg,var(--accent-color),var(--primary-color)); width:0%; transition:width .5s;}
+    .question {
+      background:#f8fafc; padding:20px; border-left:5px solid var(--accent-color);
+      border-radius:15px; font-size:clamp(1rem, 4vw, 1.2rem); margin:20px 0;
+    }
+    .options {
+      display:grid; gap:15px; grid-template-columns: 1fr;
+    }
+    @media (min-width:600px) {
+      .options { grid-template-columns:1fr 1fr; gap:20px; }
+    }
+    .option {
+      background:#f8fafc; border:2px solid #dbeafe; border-radius:12px; padding:15px;
+      cursor:pointer; display:flex; align-items:center; transition:var(--transition);
+    }
+    .option:hover {background:#f1f5f9; border-color:var(--accent-color);}
+    .option-letter {
+      width:35px;height:35px;border-radius:50%;background:#dbeafe;display:flex;
+      justify-content:center;align-items:center;margin-right:15px;font-weight:bold;color:var(--secondary-color);
+    }
+    .option.correct {border-color:var(--success-color); background:rgba(34,197,94,0.1);}
+    .option.incorrect {border-color:var(--error-color); background:rgba(239,68,68,0.1);}
+    .feedback {
+      display:none; margin-top:20px; padding:20px; background:#f8fafc; border-left:5px solid var(--accent-color); border-radius:12px;
+    }
+    .feedback.show {display:block;}
+    .correct-answer {font-weight:bold; margin:10px 0;}
+    .buttons {margin-top:20px; display:flex; justify-content:flex-end;}
+    .btn {
+      padding:12px 25px; border:none; border-radius:10px; cursor:pointer; font-weight:600;
+      background:linear-gradient(135deg,var(--accent-color),var(--primary-color)); color:white; margin:5px;
+    }
+    .btn:disabled {opacity:0.6; cursor:not-allowed;}
+    .result-container {
+      display:none; text-align:center; background:var(--card-color); border-radius:18px; padding:40px; box-shadow:var(--shadow);
+    }
+    .result-container.show {display:block;}
+    .score {font-size:2.5rem; color:var(--primary-color); margin:20px 0;}
+    .review-container {
+      display:none; background:var(--card-color); padding:30px; border-radius:18px; box-shadow:var(--shadow); margin-top:20px;
+    }
+    .review-question {
+      margin-bottom:25px; padding:20px; border-left:5px solid var(--accent-color); border-radius:12px; background:#f8fafc;
+    }
+    .review-question h3 {margin-bottom:10px; color:var(--secondary-color);}
+    .user-answer.correct {color:var(--success-color); font-weight:bold;}
+    .user-answer.incorrect {color:var(--error-color); font-weight:bold;}
+
+    /* Ajustes para telas pequenas */
+    @media (max-width:480px) {
+      body { padding:10px; }
+      .container { padding:10px; }
+      .btn { padding:10px 15px; font-size:0.9rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><i class="fas fa-chalkboard-teacher"></i> Negative Words - Vídeo Aula + Quiz</h1>
+      <p class="subtitle">Assista ao vídeo e depois responda às 20 questões interativas.</p>
+    </header>
+
+    <!-- VIDEO -->
+    <div class="video-container">
+      <h2>🎬 Negative Words - Video Course + Quiz</h2>
+      <iframe width="560" height="315" src="https://www.youtube.com/embed/u-W6SqOzczU?si=T_S99skTd4Cu7sDJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+
+    <!-- QUIZ -->
+    <div class="quiz-container">
+      <div class="question-header">
+        <div class="question-number">Questão <span id="current-question">1</span> de <span id="total-questions"></span></div>
+        <div class="score-container">Pontuação: <span id="current-score">0</span></div>
+      </div>
+      <div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+      <div class="question" id="question-text">Carregando...</div>
+      <audio controls id="audio" style="margin:15px 0;"></audio>
+      <div class="options" id="options-container"></div>
+      <div class="feedback" id="feedback">
+        <div class="correct-answer" id="correct-answer"></div>
+        <div id="explanation"></div>
+      </div>
+      <div class="buttons">
+        <button class="btn" id="next-btn" disabled>Próxima</button>
+      </div>
+    </div>
+
+    <div class="result-container" id="result-container">
+      <h2><i class="fas fa-medal"></i> Quiz Finalizado!</h2>
+      <div class="score" id="final-score">0</div>
+      <p id="percentage"></p>
+      <button class="btn" id="review-btn">Revisar Respostas</button>
+      <button class="btn" onclick="location.reload()">Reiniciar</button>
+    </div>
+
+    <div class="review-container" id="review-container"></div>
+  </div>
+
+  <script>
+    // 👇 Aqui entram as 20 questões (mesmas da versão anterior com explicações em português)
+    const questions = [
+      {q:"There are some people. (Make it negative)", a:"There are no people.", options:["There are no people.","There are not any people.","There are nothing.","There are not people."], reason:"Podemos negar com 'There are no people'. Também é possível 'There are not any people'."},
+      {q:"There was someone at home. (Make it negative)", a:"There was no-one at home.", options:["There was no-one at home.","There was not someone at home.","There was not no-one at home.","There was none at home."], reason:"Forma correta: 'There was no-one at home' = Não havia ninguém em casa."},
+      {q:"We saw something. (Make it negative)", a:"We saw nothing.", options:["We did not see nothing.","We saw nothing.","We did not saw anything.","We saw not anything."], reason:"'We saw nothing' = Nós não vimos nada."},
+      {q:"I have always done this. (Make it negative)", a:"I have never done this.", options:["I have not ever done this.","I have never done this.","I never have done this.","I did not have done this."], reason:"'I have never done this' = Eu nunca fiz isso."},
+      {q:"It is still raining. (Make it negative)", a:"It is no longer raining.", options:["It is not raining anymore.","It is no longer raining.","It does not rain no more.","It rains not now."], reason:"'It is no longer raining' = Não está mais chovendo."},
+      {q:"We drink both wine and beer. (Make it negative)", a:"We drink neither wine nor beer.", options:["We do not drink wine.","We drink neither wine nor beer.","We do not drink both.","We drink not wine or beer."], reason:"'We drink neither wine nor beer' = Não bebemos vinho nem cerveja."},
+      {q:"They had much money. (Make it negative)", a:"They had very little money.", options:["They had not much money.","They had very little money.","They did not have much money.","They had few money."], reason:"'They had very little money' = Eles tinham muito pouco dinheiro."},
+      {q:"She knows many people. (Make it negative)", a:"She knows very few people.", options:["She does not know people.","She knows very few people.","She does not know many people.","She knew no people."], reason:"'She knows very few people' = Ela conhece pouquíssimas pessoas."},
+      {q:"Little and few are considered...", a:"Negative words.", options:["Positive words.","Negative words.","Neutral words.","Adverbs."], reason:"'Little' e 'few' são considerados negativos (quase nenhum)."},
+      {q:"A little and a few mean...", a:"Some.", options:["Nothing.","Some.","All.","Almost none."], reason:"'A little' e 'a few' são positivos, significam 'algum/alguns'."},
+      {q:"They had very little money. (Meaning)", a:"They had almost no money.", options:["They had a lot of money.","They had almost no money.","They had some money.","They had plenty of money."], reason:"'Very little money' = quase nenhum dinheiro."},
+      {q:"They had a little money. (Meaning)", a:"They had some money.", options:["They had no money.","They had some money.","They had a lot of money.","They had too much money."], reason:"'A little money' = algum dinheiro."},
+      {q:"They had few friends. (Meaning)", a:"They had almost no friends.", options:["They had some friends.","They had almost no friends.","They had many friends.","They had a lot of friends."], reason:"'Few friends' = quase nenhum amigo."},
+      {q:"They had a few friends. (Meaning)", a:"They had some friends.", options:["They had some friends.","They had almost no friends.","They had many friends.","They had no friends."], reason:"'A few friends' = alguns amigos."},
+      {q:"Choose the correct sentence:", a:"There are not any people.", options:["There are not any people.","There are any people.","There are people not.","There not are people."], reason:"Forma correta: 'There are not any people'."},
+      {q:"Choose the correct sentence:", a:"We did not see anything.", options:["We did not see anything.","We saw not anything.","We did not saw anything.","We no saw anything."], reason:"Forma correta: 'We did not see anything'."},
+      {q:"Choose the correct sentence:", a:"It is not raining anymore.", options:["It is raining no longer.","It is not raining anymore.","It rains not.","It not is raining."], reason:"Forma correta: 'It is not raining anymore'."},
+      {q:"Choose the correct sentence:", a:"She does not know many people.", options:["She does not know many people.","She know not many people.","She does not knew many people.","She not knows many people."], reason:"Forma correta: 'She does not know many people'."},
+      {q:"Choose the correct sentence:", a:"We do not drink either wine or beer.", options:["We do not drink either wine or beer.","We drink neither both.","We not drink wine and beer.","We do drink no wine or beer."], reason:"Forma correta: 'We do not drink either wine or beer'."},
+      {q:"Choose the correct sentence:", a:"They did not have much money.", options:["They did not have much money.","They had not many money.","They had not much money.","They did not had money."], reason:"Forma correta: 'They did not have much money'."}
+    ];
+
+    let currentIndex=0, score=0, userAnswers=[];
+    const totalQuestionsEl=document.getElementById("total-questions");
+    const currentQuestionEl=document.getElementById("current-question");
+    const questionText=document.getElementById("question-text");
+    const optionsContainer=document.getElementById("options-container");
+    const feedback=document.getElementById("feedback");
+    const correctAnswerEl=document.getElementById("correct-answer");
+    const explanationEl=document.getElementById("explanation");
+    const nextBtn=document.getElementById("next-btn");
+    const scoreEl=document.getElementById("current-score");
+    const progress=document.getElementById("progress");
+    const resultContainer=document.getElementById("result-container");
+    const finalScoreEl=document.getElementById("final-score");
+    const percentageEl=document.getElementById("percentage");
+    const audioEl=document.getElementById("audio");
+    const reviewBtn=document.getElementById("review-btn");
+    const reviewContainer=document.getElementById("review-container");
+
+    totalQuestionsEl.textContent=questions.length;
+
+    function loadQuestion(){
+      const q=questions[currentIndex];
+      currentQuestionEl.textContent=currentIndex+1;
+      questionText.textContent=q.q;
+      audioEl.src=`https://api.streamelements.com/kappa/v2/speech?voice=Brian&text=${encodeURIComponent(q.a)}`;
+      optionsContainer.innerHTML="";
+      q.options.forEach((opt,i)=>{
+        const div=document.createElement("div");
+        div.className="option";
+        div.innerHTML=`<div class="option-letter">${String.fromCharCode(65+i)}</div><div>${opt}</div>`;
+        div.addEventListener("click",()=>selectOption(div,opt,q.a,q.reason));
+        optionsContainer.appendChild(div);
+      });
+      feedback.classList.remove("show");
+      nextBtn.disabled=true;
+      progress.style.width=`${(currentIndex/questions.length)*100}%`;
+    }
+
+    function selectOption(div,chosen,correct,reason){
+      document.querySelectorAll(".option").forEach(o=>o.classList.remove("selected"));
+      div.classList.add("selected");
+      nextBtn.disabled=false;
+      feedback.classList.add("show");
+      correctAnswerEl.textContent="Resposta Correta: "+correct;
+      explanationEl.textContent=reason;
+      userAnswers[currentIndex]={chosen,correct,reason};
+      if(chosen===correct){div.classList.add("correct");score++;scoreEl.textContent=score;}
+      else{div.classList.add("incorrect");
+        document.querySelectorAll(".option").forEach(opt=>{if(opt.innerText.includes(correct))opt.classList.add("correct");});}
+    }
+
+    nextBtn.addEventListener("click",()=>{
+      currentIndex++;
+      if(currentIndex<questions.length){loadQuestion();}
+      else{showResults();}
+    });
+
+    function showResults(){
+      document.querySelector(".quiz-container").style.display="none";
+      resultContainer.classList.add("show");
+      finalScoreEl.textContent=`${score} / ${questions.length}`;
+      const percent=Math.round((score/questions.length)*100);
+      percentageEl.textContent=`Sua Pontuação: ${percent}%`;
+    }
+
+    reviewBtn.addEventListener("click",()=>{
+      resultContainer.style.display="none";
+      reviewContainer.style.display="block";
+      reviewContainer.innerHTML="<h2><i class='fas fa-search'></i> Revisão das Respostas</h2>";
+      questions.forEach((q,i)=>{
+        const reviewDiv=document.createElement("div");
+        reviewDiv.className="review-question";
+        const userAnswer=userAnswers[i]?userAnswers[i].chosen:"Sem resposta";
+        const isCorrect=userAnswers[i]&&userAnswers[i].chosen===q.a;
+        reviewDiv.innerHTML=`
+          <h3>Q${i+1}: ${q.q}</h3>
+          <p class="user-answer ${isCorrect?'correct':'incorrect'}">Sua Resposta: ${userAnswer}</p>
+          <p><strong>Resposta Correta:</strong> ${q.a}</p>
+          <p><em>${q.reason}</em></p>
+        `;
+        reviewContainer.appendChild(reviewDiv);
+      });
+    });
+
+    loadQuestion();
+  </script>
+</body>
+</html>
